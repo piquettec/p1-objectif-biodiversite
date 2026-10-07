@@ -30,7 +30,7 @@ $niveau = "../../";
     <div class="qc-container"> 
         <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span>Faucon pélerin</h1>
         <figure>
-  <img src="<?php echo $niveau ?>assets/images/vulnerables/IMG_Faucon-pelerin_JeanLapointe.jpg"
+  <img src="<?php echo $niveau ?>assets/images/IMG_Faucon-pelerin_JeanLapointe.jpg"
        alt="Image avec légende">
   <figcaption>
     <p>Faucon pélerin<br>
