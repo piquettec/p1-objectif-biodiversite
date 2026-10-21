@@ -35,11 +35,13 @@ $niveau = "";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header title-text="Titre du site ou du service"
-                title-url="/index.php"
+            <qc-piv-header 
+                title-text="Accueil"
+                title-url="<?php echo $niveau ?>index.php"
                 alt-logo="Accédez à Québec.ca"
+                logo-url="<?php echo $niveau ?>index.php"
                 enable-search="true"
-                show-search="true">
+                show-search="false">
                 <ul slot="links">
                     <li><a href="#fakeEnglish">English</a>
                     </li>
@@ -77,6 +79,10 @@ $niveau = "";
     </main>
 
     <footer>
+        <div class="navigation_footer">
+            <a href="/"></a>
+        </div>
+
         <qc-piv-footer logo-src="assets/sdg/dist/img/QUEBEC_couleur.svg"
             logo-src-dark-theme="assets/sdg/dist/img/QUEBEC_blanc.svg">
             <nav aria-label="Navigation du pied de page">
