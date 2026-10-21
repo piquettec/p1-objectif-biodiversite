@@ -35,8 +35,8 @@ $niveau = "";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header
-                title-url="index.php"
+            <qc-piv-header title-text="Titre du site ou du service"
+                title-url="/index.php"
                 alt-logo="Accédez à Québec.ca"
                 enable-search="true"
                 show-search="true">
@@ -47,14 +47,6 @@ $niveau = "";
                     </li>
                 </ul>
 
-                <nav aria-label="Navigation du haut de page">
-                    <ul>
-                        <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                        <li><a href="<?php echo $niveau ?>">Liste des espèces</a></li>
-                        <li><a href="<?php echo $niveau ?>">Fiche espèce</a></li>
-                    </ul>
-                </nav>
-
                 <form slot="search-zone"
                     method="get"
                     action="https://www.google.ca/search">
@@ -62,13 +54,15 @@ $niveau = "";
                         piv-background=""></qc-search-bar>
                 </form>
             </qc-piv-header>
-            <nav aria-label="Navigation du haut de page">
-                    <ul>
-                        <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                        <li><a href="especes/index.php">Liste des espèces</a></li>
-                        <li><a href="especes/fiche/index.php">Fiche espèce</a></li>
-                    </ul>
-                </nav>
+        </div>
+        </qc-piv-header>
+        <nav aria-label="Navigation du haut de page">
+            <ul>
+                <li><a href="<?php echo $niveau ?>">Accueil</a></li>
+                <li><a href="especes/index.php">Liste des espèces</a></li>
+                <li><a href="especes/fiche/index.php">Fiche espèce</a></li>
+            </ul>
+        </nav>
         </div>
     </header>
 
@@ -83,13 +77,25 @@ $niveau = "";
     </main>
 
     <footer>
-        <qc-piv-footer>
+        <qc-piv-footer logo-src="assets/sdg/dist/img/QUEBEC_couleur.svg"
+            logo-src-dark-theme="assets/sdg/dist/img/QUEBEC_blanc.svg">
             <nav aria-label="Navigation du pied de page">
                 <ul>
-                    <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                    <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design gouvernemental</a></li>
+                    <li><a href="/">Accessibilité</a></li>
+                    <li><a href="/">Plan du site</a></li>
+                    <li><a href="/">Accès à l’information</a></li>
+                    <li><a href="/">Politique de confidentialité</a></li>
+                    <li><a href="/">Conditions d'utilisation</a></li>
+                    <li><a href="/">À propos de Québec.ca</a></li>
                 </ul>
             </nav>
+            <qc-external-link slot="copyright">
+                <a target="_blank"
+                    rel="noopener"
+                    href="https://www.quebec.ca/droit-auteur">
+                    © Gouvernement du Québec, 2026
+                </a>
+            </qc-external-link>
         </qc-piv-footer>
     </footer>
 </body>
