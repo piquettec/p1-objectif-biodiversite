@@ -12,12 +12,9 @@ $niveau = "../";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démo trousse SDG — Cégep</title>
-
-    <!-- Feuille de styles de la trousse (design gouvernemental). -->
+    <title>Biodiversité - Liste espèces</title>
     <link rel="stylesheet" href="<?php echo $niveau ?>assets/sdg/dist/css/qc-sdg.min.css">
-
-    <!-- Script des composants web de la trousse. -->
+    <link rel="stylesheet" href="<?php echo $niveau ?>style.css">
     <script defer src="<?php echo $niveau ?>assets/sdg/dist/js/qc-sdg.min.js"></script>
 </head>
 

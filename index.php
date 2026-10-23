@@ -21,13 +21,9 @@ $niveau = "";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démo trousse SDG — Cégep</title>
-
-    <!-- Feuille de styles de la trousse (design gouvernemental). -->
+    <title>Biodiversité</title>
     <link rel="stylesheet" href="assets/sdg/dist/css/qc-sdg.min.css">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Script des composants web de la trousse. -->
+    <link rel="stylesheet" href="<?php echo $niveau ?>style.css">
     <script defer src="assets/sdg/dist/js/qc-sdg.min.js"></script>
 
 </head>
@@ -35,7 +31,7 @@ $niveau = "";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header 
+            <qc-piv-header
                 title-text="Accueil"
                 title-url="<?php echo $niveau ?>index.php"
                 alt-logo="Accédez à Québec.ca"
@@ -65,15 +61,23 @@ $niveau = "";
                 <li><a href="especes/fiche/index.php">Fiche espèce</a></li>
             </ul>
         </nav>
-        </div>
+        <figure class="image__principal">
+            <picture>
+                <source
+                    srcset="https://placehold.co/1920x500"
+                    media="(min-width:641px)">
+                <img
+                    srcset="https://placehold.co/600x400"
+                    alt="Image principal">
+            </picture>
+        </figure>
     </header>
 
     <main id="main" class="qc-container">
-        <h1 class="qc-h1">Titre de niveau 1</h1>
-        <h1 id="exemple-titre-h1"
-            class="qc-h1"><span class="qc-subhead ">Surtitre</span>Titre de niveau 1 avec surtitre
-        </h1>
-        <h2 class="qc-h2">Titre de niveau 2</h2>
+        <h1 class="qc-h1">Découvrir. Comprendre. Protéger.</h1>
+        <button class="btn_decouvrir" type="button">Découvrir les espèces</button>
+
+        <h2 class="qc-h2">Actualité</h2>
         <p class="accent">Un texte en accent et un <span> span. </span>
         </p>
     </main>
