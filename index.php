@@ -54,7 +54,7 @@ $niveau = "";
             </qc-piv-header>
         </div>
         </qc-piv-header>
-        <nav aria-label="Navigation du haut de page">
+        <nav class="nav__header">
             <ul>
                 <li><a href="<?php echo $niveau ?>">Accueil</a></li>
                 <li><a href="especes/index.php">Liste des espèces</a></li>

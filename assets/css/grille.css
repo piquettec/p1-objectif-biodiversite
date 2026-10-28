@@ -1,0 +1,9 @@
+.nav__header {
+    display: flex;
+    width: 90rem;
+    min-width: 48rem;
+    padding: 0 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
