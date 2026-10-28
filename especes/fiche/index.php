@@ -37,11 +37,8 @@ $niveau = "../../";
 
 
 
-                <form slot="search-zone"
-                    method="get"
-                    action="https://www.google.ca/search">
-                    <qc-search-bar name="q"
-                        piv-background=""></qc-search-bar>
+                <form slot="search-zone" method="get" action="https://www.google.ca/search">
+                    <qc-search-bar name="q" piv-background=""></qc-search-bar>
                 </form>
             </qc-piv-header>
             <nav aria-label="Navigation du haut de page">
@@ -90,6 +87,25 @@ $niveau = "../../";
                     © Gouvernement du Québec, 2026
                 </a>
             </qc-external-link>
+            <div class="info-list">
+                <p><strong>Nom: </strong>Rorqual commun</p>
+                <p><strong>Nom scientifique: </strong>Balaenoptera physalus</p>
+                <p><strong>Autres noms français: </strong>Rorqual commun, population de l'Antlantique</p>
+                <p><strong>Statut: </strong>Vulnérable</p>
+
+
+            </div>
+    </main>
+
+    <footer>
+        <qc-piv-footer>
+            <nav aria-label="Navigation du pied de page">
+                <ul>
+                    <li><a href="<?php echo $niveau ?>">Accueil</a></li>
+                    <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design
+                            gouvernemental</a></li>
+                </ul>
+            </nav>
         </qc-piv-footer>
     </footer>
 </body>
