@@ -1,0 +1,29 @@
+/* STYLE */
+@charset "UTF-8";
+
+@import url("assets/css/accordeon.css");
+
+@import url("assets/css/grille.css");
+
+@import url("assets/css/typographie.css");
+
+@import url("assets/css/variables.css");
+
+.btn_decouvrir {
+    display: flex;
+    width: 20rem;
+    min-width: var(--min-width-btn, 7rem);
+    max-width: var(--max-width-btn, 22.5rem);
+    min-height: var(--min-height-btn, 3.5rem);
+    max-height: var(--max-height-btn, 5rem);
+    padding: var(--padding-haut-bas, 1rem) var(--padding-gauche, 1.25rem)
+        var(--padding-haut-bas, 1rem) var(--padding-droite, 1.5rem);
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--Coins, 0);
+    border: var(--contour, 2px) solid
+        var(--Bouton-Tertiaire-Dfaut, rgba(255, 255, 255, 0));
+    background: var(--Bouton-Principal-Dfaut, #095797);
+    color: white;
+}
