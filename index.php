@@ -32,8 +32,6 @@ $niveau = "";
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
             <qc-piv-header
-                title-text="Accueil"
-                title-url="<?php echo $niveau ?>index.php"
                 alt-logo="Accédez à Québec.ca"
                 logo-url="<?php echo $niveau ?>index.php"
                 enable-search="true"
@@ -54,20 +52,30 @@ $niveau = "";
             </qc-piv-header>
         </div>
         </qc-piv-header>
-        <nav class="nav__header">
-            <ul>
-                <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                <li><a href="especes/index.php">Liste des espèces</a></li>
-                <li><a href="especes/fiche/index.php">Fiche espèce</a></li>
+        <nav class="header__nav">
+            <ul class="header__liste">
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Accueil</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="especes/index.php">Liste des espèces</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="especes/fiche/index.php">Fiche espèce</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
+                </li>
             </ul>
         </nav>
-        <figure class="image__principal">
+
+        <figure class="image__header">
             <picture>
                 <source
-                    srcset="https://placehold.co/1920x500"
+                    srcset="assets/images/IMG_Pygargue-tete-blanche_FrederickLelievre.jpg"
                     media="(min-width:641px)">
                 <img
-                    srcset="https://placehold.co/600x400"
+                    src="assets/images/IMG_Pygargue-tete-blanche_FrederickLelievre.jpg"
                     alt="Image principal">
             </picture>
         </figure>
@@ -84,7 +92,7 @@ $niveau = "";
 
     <footer>
         <div class="navigation_footer">
-            <a href="/"></a>
+            <a href="#"></a>
         </div>
 
         <qc-piv-footer logo-src="assets/sdg/dist/img/QUEBEC_couleur.svg"
