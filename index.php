@@ -58,10 +58,10 @@ $niveau = "";
                     <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Accueil</a>
                 </li>
                 <li class="header__liste-item">
-                    <a class="header__liste-lien" href="especes/index.php">Liste des espèces</a>
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
                 </li>
                 <li class="header__liste-item">
-                    <a class="header__liste-lien" href="especes/fiche/index.php">Fiche espèce</a>
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/fiche/index.php">Fiche espèce</a>
                 </li>
                 <li class="header__liste-item">
                     <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
@@ -72,10 +72,10 @@ $niveau = "";
         <figure class="image__header">
             <picture>
                 <source
-                    srcset="assets/images/IMG_Pygargue-tete-blanche_FrederickLelievre.jpg"
+                    srcset="assets/image_exp/Aigle_héros2x.png"
                     media="(min-width:641px)">
                 <img
-                    src="assets/images/IMG_Pygargue-tete-blanche_FrederickLelievre.jpg"
+                    srcset="assets/image_exp/Aigle_héros2x.png"
                     alt="Image principal">
             </picture>
         </figure>

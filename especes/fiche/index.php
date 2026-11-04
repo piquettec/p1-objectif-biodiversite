@@ -21,7 +21,7 @@ $niveau = "../../";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header 
+            <qc-piv-header
                 title-text="Accueil"
                 title-url="<?php echo $niveau ?>index.php"
                 alt-logo="Accédez à Québec.ca"
@@ -41,14 +41,23 @@ $niveau = "../../";
                     <qc-search-bar name="q" piv-background=""></qc-search-bar>
                 </form>
             </qc-piv-header>
-            <nav aria-label="Navigation du haut de page">
-                <ul>
-                    <li><a href="<?php echo $niveau ?>index.php">Accueil</a></li>
-                    <li><a href="../index.php">Liste des espèces</a></li>
-                    <li><a href="index.php">Fiche espèce</a></li>
-                </ul>
-            </nav>
         </div>
+        <nav class="header__nav">
+            <ul class="header__liste">
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Accueil</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">À propos</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main id="main">
@@ -95,19 +104,19 @@ $niveau = "../../";
 
 
             </div>
-    </main>
+            </main>
 
-    <footer>
-        <qc-piv-footer>
-            <nav aria-label="Navigation du pied de page">
-                <ul>
-                    <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                    <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design
-                            gouvernemental</a></li>
-                </ul>
-            </nav>
-        </qc-piv-footer>
-    </footer>
+            <footer>
+                <qc-piv-footer>
+                    <nav aria-label="Navigation du pied de page">
+                        <ul>
+                            <li><a href="<?php echo $niveau ?>">Accueil</a></li>
+                            <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design
+                                    gouvernemental</a></li>
+                        </ul>
+                    </nav>
+                </qc-piv-footer>
+            </footer>
 </body>
 
 </html>

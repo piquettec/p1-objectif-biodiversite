@@ -6,5 +6,32 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    
+    background-color: #19406c;
+}
+
+.header__liste {
+    display: flex;
+    height: 4.5rem;
+    max-width: 70rem;
+    max-height: 4.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    list-style: none;
+}
+
+.header__liste-lien {
+    text-decoration: none;
+    color: #fff;
+    color: aqua;
+}
+.header__liste-lien:hover {
+    color: #fff;
+}
+
+.image__header {
+    width: auto;
+    height: 37.5rem;
+    overflow: hidden;
+    object-fit: fill;
 }

@@ -1,9 +1,5 @@
 <?php
 
-/**
- * DÉMO utilisation du Système de Design Gouvernemental
- * 
- **/
 $niveau = "../";
 ?>
 <!DOCTYPE html>
@@ -21,9 +17,7 @@ $niveau = "../";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header 
-                title-text="Accueil"
-                title-url="<?php echo $niveau ?>index.php"
+            <qc-piv-header
                 alt-logo="Accédez à Québec.ca"
                 logo-url="<?php echo $niveau ?>index.php"
                 enable-search="true"
@@ -42,14 +36,23 @@ $niveau = "../";
                         piv-background=""></qc-search-bar>
                 </form>
             </qc-piv-header>
-            <nav aria-label="Navigation du haut de page">
-                <ul>
-                    <li><a href="<?php echo $niveau ?>index.php">Accueil</a></li>
-                    <li><a href="index.php">Liste des espèces</a></li>
-                    <li><a href="fiche/index.php">Fiche espèce</a></li>
-                </ul>
-            </nav>
         </div>
+        <nav class="header__nav">
+            <ul class="header__liste">
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Accueil</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/fiche/index.php">Fiche espèce</a>
+                </li>
+                <li class="header__liste-item">
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main id="main">
