@@ -1,10 +1,7 @@
 <?php
-
-/**
- * DÉMO utilisation du Système de Design Gouvernemental
- * 
- **/
 $niveau = "../../";
+include($niveau . 'inc/config.inc.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

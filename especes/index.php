@@ -1,6 +1,25 @@
 <?php
-
 $niveau = "../";
+include($niveau . 'inc/config.inc.php');
+
+
+$arrImages = array();
+$strRequete = 'SELECT nom_francais, nom_scientifique , nom_image, nom_groupe, statut_LEMV 
+                FROM especes INNER JOIN groupes 
+                ON especes.id = groupes.id 
+                INNER JOIN images 
+                ON images.id = especes.id';
+
+$pdosResultat = $pdoConnexion->prepare($strRequete);
+$pdosResultat->execute();
+
+$ligne = $pdosResultat->fetch();
+
+$arrImages['id'] = $ligne['id'];
+$arrImages['nom_image'] = $ligne['nom_image'];
+$arrImages['espece_id'] = $ligne['espece_id'];
+
+$pdosResultat->closeCursor();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,8 +77,9 @@ $niveau = "../";
     <main id="main">
         <div class="qc-container">
             <h1>Liste des espèces</h1>
-
         </div>
+
+
     </main>
 
     <footer>

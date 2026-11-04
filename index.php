@@ -1,5 +1,6 @@
 <?php
-
+$niveau = "";
+include($niveau . 'inc/config.inc.php');
 /**
  * DÉMO utilisation du Système de Design Gouvernemental
  * 
@@ -12,7 +13,6 @@
  * « réveillées » par le script /assets/sdg/js/qc-sdg.min.js chargé plus bas.
  */
 
-$niveau = "";
 
 ?>
 <!DOCTYPE html>
