@@ -5,6 +5,8 @@
  * 
  **/
 $niveau = "../../";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,12 +23,8 @@ $niveau = "../../";
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header 
-                title-text="Accueil"
-                title-url="<?php echo $niveau ?>index.php"
-                alt-logo="Accédez à Québec.ca"
-                logo-url="<?php echo $niveau ?>index.php"
-                enable-search="true"
+            <qc-piv-header title-text="Accueil" title-url="<?php echo $niveau ?>index.php"
+                alt-logo="Accédez à Québec.ca" logo-url="<?php echo $niveau ?>index.php" enable-search="true"
                 show-search="false">
                 <ul slot="links">
                     <li><a href="#fakeEnglish">English</a>
@@ -53,17 +51,38 @@ $niveau = "../../";
 
     <main id="main">
         <div class="qc-container">
-            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span>Faucon pélerin</h1>
+            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span><?php echo $especes['nom_francais']; ?></h1>
             <figure>
-                <img src="<?php echo $niveau ?>assets/images/IMG_Faucon-pelerin_JeanLapointe.jpg"
+                <img src="<?php echo $niveau ?>assets/images/<?php echo $images['nom_image']; ?>"
                     alt="Image avec légende">
                 <figcaption>
-                    <p>Faucon pélerin<br>
-                        <em>Photo: Jean Lapointe</em>
-                    </p>
+                    <p><?php echo $images['bas-de-vignette']; ?></p>
                 </figcaption>
             </figure>
+            <div class="info-list">
+                <p><strong>Nom scientifique : </strong><?php echo $especes['nom_scientifique']; ?></p>
+                <p><strong>Statut : </strong><?php echo $especes['statut_LEMV']; ?></p>
+            </div>
 
+            <section>
+                <h2>Répartition</h2>
+                <?php echo $especes['repartition']; ?>
+            </section>
+
+            <section>
+                <h2>Habitat</h2>
+                <?php echo $especes['habitat']; ?>
+            </section>
+
+            <section>
+                <h2>Alimentation</h2>
+                <?php echo $especes['alimentation']; ?>
+            </section>
+
+            <section>
+                <h2>Reproduction</h2>
+                <?php echo $especes['reproduction']; ?>
+            </section>
         </div>
     </main>
 
@@ -81,33 +100,10 @@ $niveau = "../../";
                 </ul>
             </nav>
             <qc-external-link slot="copyright">
-                <a target="_blank"
-                    rel="noopener"
-                    href="https://www.quebec.ca/droit-auteur">
+                <a target="_blank" rel="noopener" href="https://www.quebec.ca/droit-auteur">
                     © Gouvernement du Québec, 2026
                 </a>
             </qc-external-link>
-            <div class="info-list">
-                <p><strong>Nom: </strong>Rorqual commun</p>
-                <p><strong>Nom scientifique: </strong>Balaenoptera physalus</p>
-                <p><strong>Autres noms français: </strong>Rorqual commun, population de l'Antlantique</p>
-                <p><strong>Statut: </strong>Vulnérable</p>
-
-
-            </div>
-    </main>
-
-    <footer>
-        <qc-piv-footer>
-            <nav aria-label="Navigation du pied de page">
-                <ul>
-                    <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                    <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design
-                            gouvernemental</a></li>
-                </ul>
-            </nav>
-        </qc-piv-footer>
-    </footer>
 </body>
 
 </html>
