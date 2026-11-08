@@ -18,9 +18,7 @@ include($niveau . 'inc/config.inc.php');
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header
-                title-text="Accueil"
-                title-url="<?php echo $niveau ?>index.php"
+            <qc-piv-header  
                 alt-logo="Accédez à Québec.ca"
                 logo-url="<?php echo $niveau ?>index.php"
                 enable-search="true"
@@ -59,17 +57,38 @@ include($niveau . 'inc/config.inc.php');
 
     <main id="main">
         <div class="qc-container">
-            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span>Faucon pélerin</h1>
+            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span><?php echo $especes['nom_francais']; ?></h1>
             <figure>
-                <img src="<?php echo $niveau ?>assets/images/IMG_Faucon-pelerin_JeanLapointe.jpg"
+                <img src="<?php echo $niveau ?>assets/images/<?php echo $images['nom_image']; ?>"
                     alt="Image avec légende">
                 <figcaption>
-                    <p>Faucon pélerin<br>
-                        <em>Photo: Jean Lapointe</em>
-                    </p>
+                    <p><?php echo $images['bas-de-vignette']; ?></p>
                 </figcaption>
             </figure>
+            <div class="info-list">
+                <p><strong>Nom scientifique : </strong><?php echo $especes['nom_scientifique']; ?></p>
+                <p><strong>Statut : </strong><?php echo $especes['statut_LEMV']; ?></p>
+            </div>
 
+            <section>
+                <h2>Répartition</h2>
+                <?php echo $especes['repartition']; ?>
+            </section>
+
+            <section>
+                <h2>Habitat</h2>
+                <?php echo $especes['habitat']; ?>
+            </section>
+
+            <section>
+                <h2>Alimentation</h2>
+                <?php echo $especes['alimentation']; ?>
+            </section>
+
+            <section>
+                <h2>Reproduction</h2>
+                <?php echo $especes['reproduction']; ?>
+            </section>
         </div>
     </main>
 
@@ -87,9 +106,7 @@ include($niveau . 'inc/config.inc.php');
                 </ul>
             </nav>
             <qc-external-link slot="copyright">
-                <a target="_blank"
-                    rel="noopener"
-                    href="https://www.quebec.ca/droit-auteur">
+                <a target="_blank" rel="noopener" href="https://www.quebec.ca/droit-auteur">
                     © Gouvernement du Québec, 2026
                 </a>
             </qc-external-link>
