@@ -2,24 +2,102 @@
 $niveau = "../";
 include($niveau . 'inc/config.inc.php');
 
+if (isset($_GET['id']) == true) {
+    $strIdPage = $_GET['id'];
+} else {
+    $strIdPage = 0;
+}
 
-$arrImages = array();
-$strRequete = 'SELECT nom_francais, nom_scientifique , nom_image, nom_groupe, statut_LEMV 
+$nbEspecesParPage = 5;
+$enregistrementDepart = $strIdPage * $nbEspecesParPage;
+
+$strRequete = 'SELECT COUNT(*) AS nbEnregistrement
+               FROM especes';
+
+$pdosCompte = $pdoConnexion->prepare($strRequete);
+$pdosCompte->execute();
+
+$ligneCompte = $pdosCompte->fetch();
+$nbEnregistrement = $ligneCompte['nbEnregistrement'];
+$pdosCompte->closeCursor();
+
+$nbPages = ceil($nbEnregistrement / $nbEspecesParPage);
+
+$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
-                ON especes.id = groupes.id 
+                ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
-                ON images.id = especes.id';
+                ON especes.id = images.espece_id
+                WHERE especes.id 
+                LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
 $pdosResultat->execute();
 
+$arrListeEspeces = array();
 $ligne = $pdosResultat->fetch();
 
-$arrImages['id'] = $ligne['id'];
-$arrImages['nom_image'] = $ligne['nom_image'];
-$arrImages['espece_id'] = $ligne['espece_id'];
+
+for ($cpt = 0; $cpt < $pdosResultat->rowCount(); $cpt++) {
+    $arrListeEspeces[$cpt]['nom_francais'] = $ligne['nom_francais'];
+    $arrListeEspeces[$cpt]['nom_scientifique'] = $ligne['nom_scientifique'];
+    $arrListeEspeces[$cpt]['nom_image'] = $ligne['nom_image'];
+    $arrListeEspeces[$cpt]['nom_groupe'] = $ligne['nom_groupe'];
+    $arrListeEspeces[$cpt]['statut_LEMV'] = $ligne['statut_LEMV'];
+    $arrListeEspeces[$cpt]['id'] = $ligne['id'];
+    $arrListeEspeces[$cpt]['est_aire-repartition'] = $ligne['est_aire-repartition'];
+
+    $ligne = $pdosResultat->fetch();
+
+    if ($strIdPage != 0) {
+        $strRequete = 'SELECT id, nom
+                   FROM artistes
+                   INNER JOIN styles_artistes ON artistes.id = styles_artistes.style_id
+                   ORDER BY nom ASC
+                   LIMIT' . $enregistrementDepart . ',' . $nbEspecesParPage;
+    }
+}
 
 $pdosResultat->closeCursor();
+
+$strRequete = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON images.espece_id = especes.id';
+
+$pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
+$pdosResultatEspecesSug->execute();
+
+
+$arrEspecesSug = array();
+
+for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++) {
+    $arrEspecesSug[$CptEnr]['nom_francais'] = $ligneEspecesSug['nom_francais'];
+    $arrEspecesSug[$CptEnr]['nom_scientifique'] = $ligneEspecesSug['nom_scientifique'];
+    $arrEspecesSug[$CptEnr]['nom_image'] = $ligneEspecesSug['nom_image'];
+    $arrEspecesSug[$CptEnr]['nom_groupe'] = $ligneEspecesSug['nom_groupe'];
+    $arrEspecesSug[$CptEnr]['statut_LEMV'] = $ligneEspecesSug['statut_LEMV'];
+    $arrEspecesSug[$CptEnr]['id'] = $ligneEspecesSug['id'];
+    $arrEspecesSug[$CptEnr]['est_aire-repartition'] = $ligneEspecesSug['est_aire-repartition'];
+
+    $strRequeteEspecesSug = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON images.espece_id = especes.id
+                WHERE especes.id = ' . $ligneEspecesSug['id'];
+}
+
+$pdosResultatEspecesSug->closeCursor();
+
+$arrEspecesChoisis = array();
+for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
+    $especesChoisi = rand(0, count($arrListeEspeces) - 1);
+
+    array_splice($arrEspecesSug, $especesChoisi, 1);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,6 +157,59 @@ $pdosResultat->closeCursor();
             <h1>Liste des espèces</h1>
         </div>
 
+        <ul>
+            <?php
+            for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
+                <?php if ($arrListeEspeces["est_aire-repartition"] != 1) { ?>
+                    <li>
+                        <figure>
+                            <picture>
+                                <source
+                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                    media="(min-width:641px)">
+                                <img
+                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                    alt="Image principal">
+                            </picture>
+                        </figure>
+                        <a href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
+                            <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
+                        </a>
+                        <p class="nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
+                        <p class="pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
+                        <p class="pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
+                    </li><br>
+                <?php } ?>
+
+            <?php } ?>
+        </ul>
+        <?php
+        if ($strIdPage > 0) { ?>
+            <a href="index.php?id=<?php echo $strIdPage - 1; ?>">
+                Précédent
+            </a>
+            <?php
+        }
+
+        if ($nbPages > 1) {
+            for ($cpt = 0; $cpt < $nbPages; $cpt++) { ?>
+                <a href="index.php?id=<?php echo $cpt; ?>">
+                    <?php echo $cpt + 1; ?>
+                </a>
+            <?php
+            }
+        }
+
+        if ($strIdPage < $nbPages - 1) { ?>
+            <a href="index.php?id=<?php echo $strIdPage + 1; ?>">
+                Suivant
+            </a>
+        <?php
+        }
+        ?>
+
+        <br>
+        Page <?php echo $strIdPage + 1; ?> de <?php echo $nbPages; ?>
 
     </main>
 

@@ -11,9 +11,9 @@ if (stristr($_SERVER['HTTP_HOST'], 'local') || (substr($_SERVER['HTTP_HOST'], 0,
 // Selon l'environnement d'exécution (développement ou production)
 if ($blnLocal) {
     $strHost = 'localhost';
-    $strBD='26_biotique';
+    $strBD = '26_biotique';
     $strUser = '26_biotique';
-    $strPassword= 'BIOdiversité!';
+    $strPassword = 'BIOdiversite';
     error_reporting(E_ALL);
 } else {
     $strHost = 'timunix3.cegep-ste-foy.qc.ca';
