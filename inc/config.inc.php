@@ -24,7 +24,7 @@ if ($blnLocal) {
 }
 
 //Data Source Name pour l'objet PDO
-$strDsn = 'mysql:dbname='.$strBD.';host='.$strHost;
+$strDsn = 'mysql:dbname='.$strBD.';host='.$strHost. ';port=8889';
 
 //Tentative de connexion
 $pdoConnexion = new PDO($strDsn, $strUser, $strPassword);
