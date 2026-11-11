@@ -1,3 +1,5 @@
+/* Header  */
+
 .header__nav {
     display: flex;
     width: auto;
@@ -20,13 +22,13 @@
     list-style: none;
 }
 
-.header__liste-lien {
+.header__liste-item .header__liste-lien {
+    color: #fff;
     text-decoration: none;
-    color: #fff;
-    color: aqua;
 }
-.header__liste-lien:hover {
-    color: #fff;
+
+.header__liste-item .header__liste-lien:hover {
+    text-decoration: underline;
 }
 
 .image__header {
@@ -34,4 +36,27 @@
     height: 37.5rem;
     overflow: hidden;
     object-fit: fill;
+}
+
+/* contenu page liste espece  */
+
+.liste__especes {
+    display: flex;
+    width: 51.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4.1875rem;
+}
+
+.carte__especes-images {
+    width: 20rem;
+    height: 14.3125rem;
+    border-radius: 0.9375rem 0 0 0.9375rem;
+}
+
+.carte__especes {
+    width: 51.875rem;
+    height: 14.3125rem;
+    border-radius: 0 0.9375rem 0.9375rem 0;
+    background: #efebe2;
 }

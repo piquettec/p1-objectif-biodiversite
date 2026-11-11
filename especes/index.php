@@ -162,12 +162,12 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
             <h1>Liste des espèces</h1>
         </div>
 
-        <ul>
+        <ul class="liste__especes">
             <?php
             for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
-                <li>
+                <li class="carte__especes">
                     <figure>
-                        <picture>
+                        <picture class="carte__especes-images">
                             <source
                                 srcset="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
                                 media="(min-width:641px)">
@@ -176,12 +176,19 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                                 alt="Image principal">
                         </picture>
                     </figure>
-                    <a href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
-                        <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
-                    </a>
-                    <p class="nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
-                    <p class="pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
-                    <p class="pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
+                    <div class="carte__especes-texte">
+                        <a class="carte__especes-nom" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
+                            <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
+                        </a>
+                        <p class="carte__especes-nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
+
+                        <div class="carte__especes-pastilles">
+                            <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
+                            <p class="carte__especes-pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
+                        </div>
+                    </div>
+
+                    <a class="carte__especes-plus" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">En savoir plus</a>
                 </li><br>
             <?php } ?>
         </ul>
