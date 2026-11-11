@@ -177,7 +177,7 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                                 alt="Image principale">
                         </picture>
                     </figure>
-                    <div class="carte__especes-texte">
+                    <div class="carte__especes-contenu">
                         <a class="carte__especes-nom" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
                             <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
                         </a>
@@ -201,18 +201,18 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                                 <?php echo $arrListeEspeces[$intCpt]["nom_groupe"]; ?>
                             </p>
                             <p class="carte__especes-pastille_statut
-                            <?php
-                            if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
-                                echo "statut-menace";
-                            } else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable") {
-                                echo "statut-vulnerable";
-                            } ?>">
+                                <?php
+                                if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
+                                    echo "statut-menace";
+                                } else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable") {
+                                    echo "statut-vulnerable";
+                                } ?>">
                                 <?php echo $arrListeEspeces[$intCpt]["statut_LEMV"]; ?>
                             </p>
                         </div>
+                        <a class="carte__especes-plus" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">En savoir plus</a>
                     </div>
 
-                    <a class="carte__especes-plus" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">En savoir plus</a>
                 </li><br>
             <?php } ?>
         </ul>

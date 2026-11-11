@@ -52,13 +52,6 @@
 }
 
 .carte__especes {
-    width: 51.875rem;
-    height: 14.3125rem;
-    border-radius: 0 0.9375rem 0.9375rem 0;
-    background: #d1cec6;
-}
-
-.carte__especes {
     display: flex;
     width: 100%;
     height: 24rem;
@@ -74,12 +67,6 @@
     flex-shrink: 0;
 }
 
-.carte__especes-figure picture {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
 .carte__especes-images {
     display: block;
     width: 100%;
@@ -90,11 +77,36 @@
 .carte__especes-contenu {
     display: flex;
     flex-direction: column;
+    flex: 1;
     min-width: 0;
     padding: 1.5rem 2rem;
 }
 
-/* Couleurs des groupes */
+/* Pastilles */
+
+.carte__especes-pastilles {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.carte__especes-pastille_groupe {
+    background-color: #d8efbf;
+    color: #30452b;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.carte__especes-pastille_statut {
+    background-color: #ffdad6;
+    color: #702d24;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
 
 .carte__especes-pastille_groupe.groupe-poisson {
     background-color: #dae6f0;
@@ -124,24 +136,29 @@
     background-color: #f8e69a;
 }
 
+/* Lien en savoir plus */
+
+.carte__especes-plus {
+    font-size: 1.5rem;
+    color: #005a9c;
+    text-decoration: underline;
+}
+
+
 .pagination {
     display: flex;
     width: 22.5rem;
     max-width: 27.5625rem;
-    min-height: 2.5rem;
-    max-height: 2.5rem;
-    align-items: flex-start;
-    align-content: flex-start;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 .pagination_page {
     display: flex;
-    min-width: 2.5rem;
-    min-height: 2.5rem;
-    max-height: 2.5rem;
-    padding: 0.5rem 0.25rem;
-    flex-direction: row;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
+    text-align: center;
 }
