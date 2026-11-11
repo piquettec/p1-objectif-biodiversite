@@ -144,7 +144,6 @@
     text-decoration: underline;
 }
 
-
 .pagination {
     display: flex;
     width: 22.5rem;
@@ -161,4 +160,126 @@
     align-items: center;
     gap: 0.5rem;
     text-align: center;
+}
+
+/* Nom de l'espèce */
+
+.carte__especes-nom {
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: #005a9c;
+    text-decoration: none;
+}
+
+.carte__especes-nom:hover {
+    text-decoration: underline;
+}
+
+/* Nom scientifique */
+
+.carte__especes-nom_scientifique {
+    font-size: 1.125rem;
+    color: #808080;
+    margin-top: 1rem;
+}
+
+/* Pied de page principal */
+
+.footer__logo {
+    display: flex;
+    align-items: flex-start;
+    max-width: 90rem;
+    margin: 0 auto;
+}
+
+.footer__principal {
+    background-color: #1c406b;
+    color: #fff;
+    padding: 4rem;
+}
+
+.footer__contenu {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+    max-width: 90rem;
+    margin: 0 auto;
+}
+
+/* Navigation secondaire */
+
+.footer__sous-titre {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer__navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__navigation a {
+    display: flex;
+    flex-direction: column;
+    max-width: 52rem;
+    align-items: flex-start;
+    align-self: stretch;
+    color: #fff;
+    text-decoration: none;
+    gap: 0.5rem;
+    line-height: 1.5rem;
+}
+
+.footer__navigation a:hover {
+    text-decoration: underline;
+}
+
+.footer__adresse {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    line-height: 1.5rem;
+    max-width: 52rem;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 0.5rem;
+}
+
+/* Réseaux sociaux */
+
+.footer__reseaux-liens {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__reseaux-liens a {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1.5rem;
+    max-width: 52rem;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 0.5rem;
+}
+
+.footer__reseaux-liens a:hover {
+    text-decoration: underline;
+}
+
+/* Version mobile */
+
+@media (max-width: 768px) {
+    .footer__contenu {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer__principal {
+        padding: 3rem 1.5rem;
+    }
 }

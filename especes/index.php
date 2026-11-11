@@ -250,6 +250,44 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
     </main>
 
     <footer>
+        
+<div class="footer__principal">
+    <a class="footer__logo" href="<?php echo $niveau ?>index.php"><img src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg" alt="Accédez à Québec.ca"></a>
+    <div class="footer__contenu">
+
+        <nav class="footer__navigation" aria-label="Navigation secondaire">
+            <h2 class="footer__sous-titre">Navigation secondaire</h2>
+            <ul>
+                <li><a href="#">Accessibilité</a></li>
+                <li><a href="#">Conditions d’utilisation</a></li>
+                <li><a href="#">Confidentialité</a></li>
+            </ul>
+        </nav>
+
+        <div class="footer__coordonnes">
+            <h2 class="footer__sous-titre">Coordonnées</h2>
+            <div class="footer__adresse">
+                <p>Ministère de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs</p>
+                <p>675, boul. René-Lévesque Est</p>
+                <p>Québec (Québec)</p>
+                <p>G1R 5V7</p>
+            </div>
+        </div>
+
+        <div class="footer__réseaux">
+            <h2 class="footer__sous-titre">Suivez-nous</h2>
+            <ul class="footer__reseaux-liens">
+                <li><a href="https://www.facebook.com/">Facebook</a></li>
+                <li><a href="https://x.com/">X (Twitter)</a></li>
+                <li><a href="https://www.youtube.com/">YouTube</a></li>
+                <li><a href="https://www.instagram.com/">Instagram</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
         <qc-piv-footer logo-src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_couleur.svg"
             logo-src-dark-theme="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg">
             <nav aria-label="Navigation du pied de page">
