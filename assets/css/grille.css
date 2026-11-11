@@ -108,6 +108,35 @@
     font-size: 1.5rem;
 }
 
+.especes-pastilles {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.pastilles-groupe, 
+.pastilles-statut {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.especes-pastille_statut {
+    background-color: #ffdad6;
+    color: #702d24;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+}
+
+.especes-pastille_groupe {
+    background-color: #d8efbf;
+    color: #30452b;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+}
+
 .carte__especes-pastille_groupe.groupe-poisson {
     background-color: #dae6f0;
 }

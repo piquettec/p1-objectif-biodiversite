@@ -86,6 +86,8 @@ $pdosResultat->closeCursor();
     <main id="main">
         <div class="qc-container">
             <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span><?php echo $arrListeEspeces['nom_francais']; ?></h1>
+            <p class="carte__especes-nom_scientifique"><?php echo $arrListeEspeces['nom_scientifique']; ?></p>
+
             <figure>
                 <img src="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces['nom_image']; ?>"
                     alt="Image avec légende">
@@ -93,14 +95,39 @@ $pdosResultat->closeCursor();
                     <p><?php echo $arrListeEspeces['bas-de-vignette']; ?></p>
                 </figcaption>
             </figure>
-            <div class="info-list">
-                <p><strong>Nom scientifique : </strong><?php echo $arrListeEspeces['nom_scientifique']; ?></p>
-                <p><strong>Statut : </strong>
-                <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces['statut_LEMV']; ?></p>
-                </p>
-                <p><strong>Groupe : </strong>
-                <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces['nom_groupe']; ?></p>
-                </p>
+            <div class="especes-pastilles">
+                <div class="pastilles-groupe">
+                    <p><strong>Groupe : </strong>
+                    <p class="especes-pastille_groupe
+                    <?php
+                    if ($arrListeEspeces["nom_groupe"] == "Poissons") {
+                        echo "groupe-poisson";
+                    } else if ($arrListeEspeces["nom_groupe"] == "Mammifères") {
+                        echo "groupe-mammifere";
+                    } else if ($arrListeEspeces["nom_groupe"] == "Oiseaux ") {
+                        echo "groupe-oiseaux";
+                    } else if ($arrListeEspeces["nom_groupe"] == "Amphibiens") {
+                        echo "groupe-amphibiens";
+                    } else if ($arrListeEspeces["nom_groupe"] == "Reptile") {
+                        echo "groupe-reptile";
+                    }
+                    ?>">
+                        <?php echo $arrListeEspeces["nom_groupe"]; ?>
+                    </p>
+                </div>
+
+                <div class="pastilles-statut">
+                    <p><strong>Statut : </strong>
+                    <p class="especes-pastille_statut
+                    <?php
+                    if ($arrListeEspeces["statut_LEMV"] == "Menacé") {
+                        echo "statut-menace";
+                    } else if ($arrListeEspeces["statut_LEMV"] == "Vulnérable") {
+                        echo "statut-vulnerable";
+                    } ?>">
+                        <?php echo $arrListeEspeces["statut_LEMV"]; ?>
+                    </p>
+                </div>
             </div>
 
             <section>
@@ -126,6 +153,42 @@ $pdosResultat->closeCursor();
     </main>
 
     <footer>
+        <div class="footer__principal">
+            <a class="footer__logo" href="<?php echo $niveau ?>index.php"><img src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg" alt="Accédez à Québec.ca"></a>
+            <div class="footer__contenu">
+
+                <nav class="footer__navigation" aria-label="Navigation secondaire">
+                    <h2 class="footer__sous-titre">Navigation secondaire</h2>
+                    <ul>
+                        <li><a href="#">Accessibilité</a></li>
+                        <li><a href="#">Conditions d’utilisation</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer__coordonnes">
+                    <h2 class="footer__sous-titre">Coordonnées</h2>
+                    <div class="footer__adresse">
+                        <p>Ministère de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs</p>
+                        <p>675, boul. René-Lévesque Est</p>
+                        <p>Québec (Québec)</p>
+                        <p>G1R 5V7</p>
+                    </div>
+                </div>
+
+                <div class="footer__réseaux">
+                    <h2 class="footer__sous-titre">Suivez-nous</h2>
+                    <ul class="footer__reseaux-liens">
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://x.com/">X (Twitter)</a></li>
+                        <li><a href="https://www.youtube.com/">YouTube</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
         <qc-piv-footer logo-src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_couleur.svg"
             logo-src-dark-theme="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg">
             <nav aria-label="Navigation du pied de page">
