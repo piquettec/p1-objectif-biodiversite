@@ -107,14 +107,7 @@ include($niveau . 'inc/config.inc.php');
                     © Gouvernement du Québec, 2026
                 </a>
             </qc-external-link>
-            <div class="info-list">
-                <p><strong>Nom: </strong>Rorqual commun</p>
-                <p><strong>Nom scientifique: </strong>Balaenoptera physalus</p>
-                <p><strong>Autres noms français: </strong>Rorqual commun, population de l'Antlantique</p>
-                <p><strong>Statut: </strong>Vulnérable</p>
 
-
-            </div>
             </main>
 
             <footer>
