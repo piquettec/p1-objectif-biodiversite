@@ -28,7 +28,7 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON especes.id = images.espece_id
-                WHERE especes.id 
+                WHERE `est_aire-repartition` = 0 
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
@@ -60,11 +60,12 @@ for ($cpt = 0; $cpt < $pdosResultat->rowCount(); $cpt++) {
 
 $pdosResultat->closeCursor();
 
-$strRequete = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
-                ON images.espece_id = especes.id';
+                ON images.espece_id = especes.id
+                WHERE `est_aire-repartition` = 0 ";
 
 $pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
 $pdosResultatEspecesSug->execute();
@@ -81,12 +82,13 @@ for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++
     $arrEspecesSug[$CptEnr]['id'] = $ligneEspecesSug['id'];
     $arrEspecesSug[$CptEnr]['est_aire-repartition'] = $ligneEspecesSug['est_aire-repartition'];
 
-    $strRequeteEspecesSug = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+    $strRequeteEspecesSug = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON images.espece_id = especes.id
-                WHERE especes.id = ' . $ligneEspecesSug['id'];
+                WHERE especes.id = " . $ligneEspecesSug['id'] . "
+                AND 'est_aire-repartition' = 0 ";
 }
 
 $pdosResultatEspecesSug->closeCursor();
@@ -160,27 +162,24 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
         <ul>
             <?php
             for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
-                <?php if ($arrListeEspeces["est_aire-repartition"] != 1) { ?>
-                    <li>
-                        <figure>
-                            <picture>
-                                <source
-                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
-                                    media="(min-width:641px)">
-                                <img
-                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
-                                    alt="Image principal">
-                            </picture>
-                        </figure>
-                        <a href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
-                            <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
-                        </a>
-                        <p class="nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
-                        <p class="pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
-                        <p class="pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
-                    </li><br>
-                <?php } ?>
-
+                <li>
+                    <figure>
+                        <picture>
+                            <source
+                                srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                media="(min-width:641px)">
+                            <img
+                                srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                alt="Image principal">
+                        </picture>
+                    </figure>
+                    <a href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
+                        <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
+                    </a>
+                    <p class="nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
+                    <p class="pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
+                    <p class="pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
+                </li><br>
             <?php } ?>
         </ul>
         <?php
