@@ -166,14 +166,15 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
             <?php
             for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
                 <li class="carte__especes">
-                    <figure>
-                        <picture class="carte__especes-images">
+                    <figure class="carte__especes-figure">
+                        <picture>
                             <source
                                 srcset="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
                                 media="(min-width:641px)">
                             <img
+                                class="carte__especes-images"
                                 src="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
-                                alt="Image principal">
+                                alt="Image principale">
                         </picture>
                     </figure>
                     <div class="carte__especes-texte">
@@ -193,7 +194,7 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                                     echo "groupe-oiseaux";
                                 } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Amphibiens") {
                                     echo "groupe-amphibiens";
-                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Reptile"){
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Reptile") {
                                     echo "groupe-reptile";
                                 }
                                 ?>">
@@ -201,12 +202,11 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                             </p>
                             <p class="carte__especes-pastille_statut
                             <?php
-                                if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
-                                    echo "statut-menace";
-                                } 
-                                else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable"){
-                                    echo "statut-vulnerable";
-                                } ?>">
+                            if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
+                                echo "statut-menace";
+                            } else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable") {
+                                echo "statut-vulnerable";
+                            } ?>">
                                 <?php echo $arrListeEspeces[$intCpt]["statut_LEMV"]; ?>
                             </p>
                         </div>
@@ -216,33 +216,36 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                 </li><br>
             <?php } ?>
         </ul>
-        <?php
-        if ($strIdPage > 0) { ?>
-            <a href="index.php?id=<?php echo $strIdPage - 1; ?>">
-                Précédent
-            </a>
-            <?php
-        }
+        <div class="pagination">
+            <div class="pagination_page">
+                <?php
+                if ($strIdPage > 0) { ?>
+                    <a href="index.php?id=<?php echo $strIdPage - 1; ?>">
+                        Précédent
+                    </a>
+                <?php
+                } ?>
+                <?php if ($nbPages > 1) {
+                    for ($cpt = 0; $cpt < $nbPages; $cpt++) { ?>
+                        <a href="index.php?id=<?php echo $cpt; ?>">
+                            <?php echo $cpt + 1; ?>
+                        </a>
+                <?php
+                    }
+                } ?>
 
-        if ($nbPages > 1) {
-            for ($cpt = 0; $cpt < $nbPages; $cpt++) { ?>
-                <a href="index.php?id=<?php echo $cpt; ?>">
-                    <?php echo $cpt + 1; ?>
-                </a>
-            <?php
-            }
-        }
+                <?php if ($strIdPage < $nbPages - 1) { ?>
+                    <a href="index.php?id=<?php echo $strIdPage + 1; ?>">
+                        Suivant
+                    </a>
+                <?php
+                }
+                ?>
+            </div>
 
-        if ($strIdPage < $nbPages - 1) { ?>
-            <a href="index.php?id=<?php echo $strIdPage + 1; ?>">
-                Suivant
-            </a>
-        <?php
-        }
-        ?>
-
-        <br>
-        Page <?php echo $strIdPage + 1; ?> de <?php echo $nbPages; ?>
+            <br>
+            Page <?php echo $strIdPage + 1; ?> de <?php echo $nbPages; ?>
+        </div>
 
     </main>
 
