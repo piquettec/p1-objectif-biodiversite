@@ -2,6 +2,34 @@
 $niveau = "../../";
 include($niveau . 'inc/config.inc.php');
 
+$idEspeces = $_GET['id'];
+
+$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, habitat, alimentation, reproduction, repartition, `bas-de-vignette`
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON especes.id = images.espece_id
+                WHERE especes.id=" . $idEspeces;
+
+$pdosResultat = $pdoConnexion->prepare($strRequete);
+$pdosResultat->execute();
+
+$arrListeEspeces = array();
+$ligne = $pdosResultat->fetch();
+
+$arrListeEspeces['nom_francais'] = $ligne['nom_francais'];
+$arrListeEspeces['nom_scientifique'] = $ligne['nom_scientifique'];
+$arrListeEspeces['nom_image'] = $ligne['nom_image'];
+$arrListeEspeces['nom_groupe'] = $ligne['nom_groupe'];
+$arrListeEspeces['statut_LEMV'] = $ligne['statut_LEMV'];
+$arrListeEspeces['habitat'] = $ligne['habitat'];
+$arrListeEspeces['alimentation'] = $ligne['alimentation'];
+$arrListeEspeces['reproduction'] = $ligne['reproduction'];
+$arrListeEspeces['repartition'] = $ligne['repartition'];
+$arrListeEspeces['bas-de-vignette'] = $ligne['bas-de-vignette'];
+
+$pdosResultat->closeCursor();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,7 +46,7 @@ include($niveau . 'inc/config.inc.php');
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header  
+            <qc-piv-header
                 alt-logo="Accédez à Québec.ca"
                 logo-url="<?php echo $niveau ?>index.php"
                 enable-search="true"
@@ -57,37 +85,42 @@ include($niveau . 'inc/config.inc.php');
 
     <main id="main">
         <div class="qc-container">
-            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span><?php echo $especes['nom_francais']; ?></h1>
+            <h1 class="qc-h1"><span class="qc-subhead ">Fiche</span><?php echo $arrListeEspeces['nom_francais']; ?></h1>
             <figure>
-                <img src="<?php echo $niveau ?>assets/images/<?php echo $images['nom_image']; ?>"
+                <img src="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces['nom_image']; ?>"
                     alt="Image avec légende">
                 <figcaption>
-                    <p><?php echo $images['bas-de-vignette']; ?></p>
+                    <p><?php echo $arrListeEspeces['bas-de-vignette']; ?></p>
                 </figcaption>
             </figure>
             <div class="info-list">
-                <p><strong>Nom scientifique : </strong><?php echo $especes['nom_scientifique']; ?></p>
-                <p><strong>Statut : </strong><?php echo $especes['statut_LEMV']; ?></p>
+                <p><strong>Nom scientifique : </strong><?php echo $arrListeEspeces['nom_scientifique']; ?></p>
+                <p><strong>Statut : </strong>
+                <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces['statut_LEMV']; ?></p>
+                </p>
+                <p><strong>Groupe : </strong>
+                <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces['nom_groupe']; ?></p>
+                </p>
             </div>
 
             <section>
                 <h2>Répartition</h2>
-                <?php echo $especes['repartition']; ?>
+                <?php echo $arrListeEspeces['repartition']; ?>
             </section>
 
             <section>
                 <h2>Habitat</h2>
-                <?php echo $especes['habitat']; ?>
+                <?php echo $arrListeEspeces['habitat']; ?>
             </section>
 
             <section>
                 <h2>Alimentation</h2>
-                <?php echo $especes['alimentation']; ?>
+                <?php echo $arrListeEspeces['alimentation']; ?>
             </section>
 
             <section>
                 <h2>Reproduction</h2>
-                <?php echo $especes['reproduction']; ?>
+                <?php echo $arrListeEspeces['reproduction']; ?>
             </section>
         </div>
     </main>
@@ -110,27 +143,8 @@ include($niveau . 'inc/config.inc.php');
                     © Gouvernement du Québec, 2026
                 </a>
             </qc-external-link>
-            <div class="info-list">
-                <p><strong>Nom: </strong>Rorqual commun</p>
-                <p><strong>Nom scientifique: </strong>Balaenoptera physalus</p>
-                <p><strong>Autres noms français: </strong>Rorqual commun, population de l'Antlantique</p>
-                <p><strong>Statut: </strong>Vulnérable</p>
-
-
-            </div>
-            </main>
-
-            <footer>
-                <qc-piv-footer>
-                    <nav aria-label="Navigation du pied de page">
-                        <ul>
-                            <li><a href="<?php echo $niveau ?>">Accueil</a></li>
-                            <li><a href="https://design.quebec.ca" target="_blank" rel="noopener">Système de design
-                                    gouvernemental</a></li>
-                        </ul>
-                    </nav>
-                </qc-piv-footer>
-            </footer>
+        </qc-piv-footer>
+    </footer>
 </body>
 
 </html>
