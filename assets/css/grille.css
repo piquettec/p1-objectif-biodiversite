@@ -1,3 +1,5 @@
+/* Header  */
+
 .header__nav {
     display: flex;
     width: auto;
@@ -20,13 +22,13 @@
     list-style: none;
 }
 
-.header__liste-lien {
+.header__liste-item .header__liste-lien {
+    color: #fff;
     text-decoration: none;
-    color: #fff;
-    color: aqua;
 }
-.header__liste-lien:hover {
-    color: #fff;
+
+.header__liste-item .header__liste-lien:hover {
+    text-decoration: underline;
 }
 
 .image__header {
@@ -34,4 +36,129 @@
     height: 37.5rem;
     overflow: hidden;
     object-fit: fill;
+}
+
+/* contenu page liste espece  */
+
+.liste__especes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    width: 100%;
+    max-width: 87rem;
+    margin: 2rem auto;
+    padding: 0;
+}
+
+.carte__especes {
+    display: flex;
+    width: 100%;
+    height: 24rem;
+    border-radius: 1.5rem;
+    background-color: #efebe2;
+    overflow: hidden;
+}
+
+.carte__especes-figure {
+    width: 38.5%;
+    height: 100%;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.carte__especes-images {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carte__especes-contenu {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    padding: 1.5rem 2rem;
+}
+
+/* Pastilles */
+
+.carte__especes-pastilles {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.carte__especes-pastille_groupe {
+    background-color: #d8efbf;
+    color: #30452b;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.carte__especes-pastille_statut {
+    background-color: #ffdad6;
+    color: #702d24;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.carte__especes-pastille_groupe.groupe-poisson {
+    background-color: #dae6f0;
+}
+
+.carte__especes-pastille_groupe.groupe-mammifere {
+    background-color: #68ceba;
+}
+
+.carte__especes-pastille_groupe.groupe-oiseaux {
+    background-color: #d0dc03;
+}
+
+.carte__especes-pastille_groupe.groupe-amphibiens {
+    background-color: #f1f1f2;
+}
+
+.carte__especes-pastille_groupe.groupe-reptile {
+    background-color: #d7f0bb;
+}
+
+.carte__especes-pastille_statut.statut-menace {
+    background-color: #bc2916;
+}
+
+.carte__especes-pastille_statut.statut-vulnerable {
+    background-color: #f8e69a;
+}
+
+/* Lien en savoir plus */
+
+.carte__especes-plus {
+    font-size: 1.5rem;
+    color: #005a9c;
+    text-decoration: underline;
+}
+
+
+.pagination {
+    display: flex;
+    width: 22.5rem;
+    max-width: 27.5625rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.pagination_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
 }

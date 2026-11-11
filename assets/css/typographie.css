@@ -14,7 +14,7 @@ h4,
 h5,
 h6 {
     /* Adapter la famille de polices selon le projet */
-    font-family: Roboto;
+    font-family: 'Open Sans';
     font-weight: 700;
     font-style: normal;
 }

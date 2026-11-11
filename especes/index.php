@@ -28,7 +28,8 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON especes.id = images.espece_id
-                WHERE especes.id 
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
@@ -60,11 +61,13 @@ for ($cpt = 0; $cpt < $pdosResultat->rowCount(); $cpt++) {
 
 $pdosResultat->closeCursor();
 
-$strRequete = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
-                ON images.espece_id = especes.id';
+                ON images.espece_id = especes.id
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104";
 
 $pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
 $pdosResultatEspecesSug->execute();
@@ -81,12 +84,14 @@ for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++
     $arrEspecesSug[$CptEnr]['id'] = $ligneEspecesSug['id'];
     $arrEspecesSug[$CptEnr]['est_aire-repartition'] = $ligneEspecesSug['est_aire-repartition'];
 
-    $strRequeteEspecesSug = 'SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id
+    $strRequeteEspecesSug = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON images.espece_id = especes.id
-                WHERE especes.id = ' . $ligneEspecesSug['id'];
+                WHERE especes.id = " . $ligneEspecesSug['id'] . "
+                AND 'est_aire-repartition' = 0 
+                AND images.id != 104";
 }
 
 $pdosResultatEspecesSug->closeCursor();
@@ -157,59 +162,90 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
             <h1>Liste des espèces</h1>
         </div>
 
-        <ul>
+        <ul class="liste__especes">
             <?php
             for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
-                <?php if ($arrListeEspeces["est_aire-repartition"] != 1) { ?>
-                    <li>
-                        <figure>
-                            <picture>
-                                <source
-                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
-                                    media="(min-width:641px)">
-                                <img
-                                    srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
-                                    alt="Image principal">
-                            </picture>
-                        </figure>
-                        <a href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
+                <li class="carte__especes">
+                    <figure class="carte__especes-figure">
+                        <picture>
+                            <source
+                                srcset="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
+                                media="(min-width:641px)">
+                            <img
+                                class="carte__especes-images"
+                                src="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
+                                alt="Image principale">
+                        </picture>
+                    </figure>
+                    <div class="carte__especes-contenu">
+                        <a class="carte__especes-nom" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">
                             <?php echo $arrListeEspeces[$intCpt]["nom_francais"]; ?>
                         </a>
-                        <p class="nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
-                        <p class="pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
-                        <p class="pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
-                    </li><br>
-                <?php } ?>
+                        <p class="carte__especes-nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
 
+                        <div class="carte__especes-pastilles">
+                            <p class="carte__especes-pastille_groupe
+                                <?php
+                                if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Poissons") {
+                                    echo "groupe-poisson";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Mammifères") {
+                                    echo "groupe-mammifere";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Oiseaux ") {
+                                    echo "groupe-oiseaux";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Amphibiens") {
+                                    echo "groupe-amphibiens";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Reptile") {
+                                    echo "groupe-reptile";
+                                }
+                                ?>">
+                                <?php echo $arrListeEspeces[$intCpt]["nom_groupe"]; ?>
+                            </p>
+                            <p class="carte__especes-pastille_statut
+                                <?php
+                                if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
+                                    echo "statut-menace";
+                                } else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable") {
+                                    echo "statut-vulnerable";
+                                } ?>">
+                                <?php echo $arrListeEspeces[$intCpt]["statut_LEMV"]; ?>
+                            </p>
+                        </div>
+                        <a class="carte__especes-plus" href="fiche/index.php?id=<?php echo $arrListeEspeces[$intCpt]["id"]; ?>">En savoir plus</a>
+                    </div>
+
+                </li><br>
             <?php } ?>
         </ul>
-        <?php
-        if ($strIdPage > 0) { ?>
-            <a href="index.php?id=<?php echo $strIdPage - 1; ?>">
-                Précédent
-            </a>
-            <?php
-        }
+        <div class="pagination">
+            <div class="pagination_page">
+                <?php
+                if ($strIdPage > 0) { ?>
+                    <a href="index.php?id=<?php echo $strIdPage - 1; ?>">
+                        Précédent
+                    </a>
+                <?php
+                } ?>
+                <?php if ($nbPages > 1) {
+                    for ($cpt = 0; $cpt < $nbPages; $cpt++) { ?>
+                        <a href="index.php?id=<?php echo $cpt; ?>">
+                            <?php echo $cpt + 1; ?>
+                        </a>
+                <?php
+                    }
+                } ?>
 
-        if ($nbPages > 1) {
-            for ($cpt = 0; $cpt < $nbPages; $cpt++) { ?>
-                <a href="index.php?id=<?php echo $cpt; ?>">
-                    <?php echo $cpt + 1; ?>
-                </a>
-            <?php
-            }
-        }
+                <?php if ($strIdPage < $nbPages - 1) { ?>
+                    <a href="index.php?id=<?php echo $strIdPage + 1; ?>">
+                        Suivant
+                    </a>
+                <?php
+                }
+                ?>
+            </div>
 
-        if ($strIdPage < $nbPages - 1) { ?>
-            <a href="index.php?id=<?php echo $strIdPage + 1; ?>">
-                Suivant
-            </a>
-        <?php
-        }
-        ?>
-
-        <br>
-        Page <?php echo $strIdPage + 1; ?> de <?php echo $nbPages; ?>
+            <br>
+            Page <?php echo $strIdPage + 1; ?> de <?php echo $nbPages; ?>
+        </div>
 
     </main>
 
