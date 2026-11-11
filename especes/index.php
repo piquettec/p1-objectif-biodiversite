@@ -29,6 +29,7 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 INNER JOIN images 
                 ON especes.id = images.espece_id
                 WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
@@ -65,7 +66,8 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON images.espece_id = especes.id
-                WHERE `est_aire-repartition` = 0 ";
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104";
 
 $pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
 $pdosResultatEspecesSug->execute();
@@ -88,7 +90,8 @@ for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++
                 INNER JOIN images 
                 ON images.espece_id = especes.id
                 WHERE especes.id = " . $ligneEspecesSug['id'] . "
-                AND 'est_aire-repartition' = 0 ";
+                AND 'est_aire-repartition' = 0 
+                AND images.id != 104";
 }
 
 $pdosResultatEspecesSug->closeCursor();
@@ -166,10 +169,10 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                     <figure>
                         <picture>
                             <source
-                                srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                srcset="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
                                 media="(min-width:641px)">
                             <img
-                                srcset="<?php echo $niveau ?>assets/images/<?php $arrListeEspeces[$intCpt]["nom_image"] ?>"
+                                src="<?php echo $niveau ?>assets/images/<?php echo $arrListeEspeces[$intCpt]["nom_image"]; ?>"
                                 alt="Image principal">
                         </picture>
                     </figure>
