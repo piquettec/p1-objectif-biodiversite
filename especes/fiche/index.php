@@ -18,10 +18,7 @@ include($niveau . 'inc/config.inc.php');
 <body>
     <header>
         <div id="pivEnteteExempleRecherchePersonnalisee">
-            <qc-piv-header  
-                alt-logo="Accédez à Québec.ca"
-                logo-url="<?php echo $niveau ?>index.php"
-                enable-search="true"
+            <qc-piv-header alt-logo="Accédez à Québec.ca" logo-url="<?php echo $niveau ?>index.php" enable-search="true"
                 show-search="false">
                 <ul slot="links">
                     <li><a href="#fakeEnglish">English</a>
