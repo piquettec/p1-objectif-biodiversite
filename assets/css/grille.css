@@ -46,17 +46,44 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 4.1875rem;
-}
-
-.carte__especes-images {
-    width: 20rem;
-    height: 14.3125rem;
-    border-radius: 0.9375rem 0 0 0.9375rem;
+    list-style: none;
 }
 
 .carte__especes {
     width: 51.875rem;
     height: 14.3125rem;
     border-radius: 0 0.9375rem 0.9375rem 0;
-    background: #efebe2;
+    background: #d1cec6;
+}
+
+/* Couleurs des groupes */
+
+.carte__especes-pastille_groupe.groupe-poisson {
+    background-color: #DAE6F0;
+}
+
+.carte__especes-pastille_groupe.groupe-mammifere {
+    background-color: #68CEBA;
+}
+
+.carte__especes-pastille_groupe.groupe-oiseaux {
+    background-color: #D0DC03;
+}
+
+.carte__especes-pastille_groupe.groupe-amphibiens {
+    background-color: #F1F1F2;
+}
+
+.carte__especes-pastille_groupe.groupe-reptile {
+    background-color: #D7F0BB;
+}
+
+
+
+.carte__especes-pastille_statut.statut-menace {
+    background-color: #bc2916;
+}
+
+.carte__especes-pastille_statut.statut-vulnerable {
+    background-color: #F8E69A;
 }

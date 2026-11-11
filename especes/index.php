@@ -183,8 +183,32 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                         <p class="carte__especes-nom_scientifique"><?php echo $arrListeEspeces[$intCpt]["nom_scientifique"] ?></p>
 
                         <div class="carte__especes-pastilles">
-                            <p class="carte__especes-pastille_groupe"><?php echo $arrListeEspeces[$intCpt]["nom_groupe"] ?></p>
-                            <p class="carte__especes-pastille_statut"><?php echo $arrListeEspeces[$intCpt]["statut_LEMV"] ?></p>
+                            <p class="carte__especes-pastille_groupe
+                                <?php
+                                if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Poissons") {
+                                    echo "groupe-poisson";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Mammifères") {
+                                    echo "groupe-mammifere";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Oiseaux ") {
+                                    echo "groupe-oiseaux";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Amphibiens") {
+                                    echo "groupe-amphibiens";
+                                } else if ($arrListeEspeces[$intCpt]["nom_groupe"] == "Reptile"){
+                                    echo "groupe-reptile";
+                                }
+                                ?>">
+                                <?php echo $arrListeEspeces[$intCpt]["nom_groupe"]; ?>
+                            </p>
+                            <p class="carte__especes-pastille_statut
+                            <?php
+                                if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Menacé") {
+                                    echo "statut-menace";
+                                } 
+                                else if ($arrListeEspeces[$intCpt]["statut_LEMV"] == "Vulnérable"){
+                                    echo "statut-vulnerable";
+                                } ?>">
+                                <?php echo $arrListeEspeces[$intCpt]["statut_LEMV"]; ?>
+                            </p>
                         </div>
                     </div>
 
