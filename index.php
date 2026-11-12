@@ -115,25 +115,33 @@ include($niveau . 'inc/config.inc.php');
             <h2 class="qc-h2">Espèce à découvrir</h2>
 
             <div class="carte-espece clair">
-                <img src="assets/images/assets/images/IMG_Tortue-Luth_LouisabelleGagnon.jpg" alt="Tortue Luth">
+                <img src="assets/images/IMG_Tortue-Luth_LouisabelleGagnon.jpg" alt="Tortue Luth">
                 <div>
                     <h3>Tortue Luth</h3>
                     <p><em>Dermochelys coriacea</em></p>
+                    <div class="tags">
+                        <span class="badge">Reptile</span>
+                        <span class="badge">Menacé</span>
+                    </div>
                     <a href="especes/fiche/index.php?id=1" class="qc-btn qc-btn-secondary">En savoir plus</a>
                 </div>
             </div>
 
             <div class="carte-espece fonce">
-                <img src="assets/images/lamproie.jpg" alt="Lamproie du Nord">
+                <img src="assets/images/IMG_Lamproie-Nord.jpg" alt="Lamproie du Nord">
                 <div>
                     <h3>Lamproie du Nord</h3>
                     <p><em>Ichthyomyzon fossor</em></p>
+                    <div class="tags">
+                        <span class="badge">Poisson</span>
+                        <span class="badge">Menacé</span>
+                    </div>
                     <a href="especes/fiche/index.php?id=2" class="qc-btn qc-btn-secondary">En savoir plus</a>
                 </div>
             </div>
 
             <div class="carte-espece clair">
-                <img src="assets/images/ours_blanc.jpg" alt="Ours Blanc">
+                <img src="assets/images/IMG_Ours-blanc_LarryMaster.jpg" alt="Ours Blanc">
                 <div>
                     <h3>Ours Blanc</h3>
                     <p><em>Ursus maritimus</em></p>
