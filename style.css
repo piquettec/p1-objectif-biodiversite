@@ -10,20 +10,295 @@
 @import url("assets/css/variables.css");
 
 .btn_decouvrir {
-    display: flex;
-    width: 20rem;
-    min-width: var(--min-width-btn, 7rem);
-    max-width: var(--max-width-btn, 22.5rem);
-    min-height: var(--min-height-btn, 3.5rem);
-    max-height: var(--max-height-btn, 5rem);
-    padding: var(--padding-haut-bas, 1rem) var(--padding-gauche, 1.25rem)
-        var(--padding-haut-bas, 1rem) var(--padding-droite, 1.5rem);
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: var(--Coins, 0);
-    border: var(--contour, 2px) solid
-        var(--Bouton-Tertiaire-Dfaut, rgba(255, 255, 255, 0));
-    background: var(--Bouton-Principal-Dfaut, #095797);
-    color: white;
+  display: flex;
+  width: 20rem;
+  min-width: var(--min-width-btn, 7rem);
+  max-width: var(--max-width-btn, 22.5rem);
+  min-height: var(--min-height-btn, 3.5rem);
+  max-height: var(--max-height-btn, 5rem);
+  padding: var(--padding-haut-bas, 1rem) var(--padding-gauche, 1.25rem)
+    var(--padding-haut-bas, 1rem) var(--padding-droite, 1.5rem);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--Coins, 0);
+  border: var(--contour, 2px) solid
+    var(--Bouton-Tertiaire-Dfaut, rgba(255, 255, 255, 0));
+  background: var(--Bouton-Principal-Dfaut, #095797);
+  color: white;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.qc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header et Navigation */
+.header__nav {
+  background-color: #1a2332;
+  padding: 10px 0;
+}
+
+.header__liste {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.header__liste-lien {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header__liste-lien:hover {
+  text-decoration: underline;
+}
+
+.image__header {
+  position: relative;
+  margin: 0;
+}
+
+.image__header img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image__contenu-superpose {
+  position: absolute;
+  bottom: 45px;
+  right: 100px;
+  text-align: right;
+}
+
+.image__contenu-superpose .qc-h1 {
+  color: #223654;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Style du bouton bleu */
+.qc-btn-primary {
+  background-color: #00539f;
+  color: #ffffff;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.qc-btn-primary:hover {
+  background-color: #003366;
+}
+/* SECTION HERO / ACCUEIL */
+.section-hero {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.section-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #1a2332;
+}
+
+/* SECTION ACTUALITÉS  */
+.section-actualite {
+  margin: 40px 0;
+}
+
+.grid-actualites {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.carte-actu {
+  flex: 1;
+  min-width: 300px;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.carte-actu img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.carte-actu h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #095797;
+}
+
+.carte-actu p {
+  font-size: 1.1rem;
+  color: #666;
+  flex-grow: 1;
+}
+
+.carte-actu a {
+  color: #00539f;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+/* SECTION ESPÈCES À DÉCOUVRIR */
+.section-especes {
+  margin: 50px 0;
+}
+
+.carte-espece {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 0;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+/* Variantes de couleurs pour les cartes d'espèces */
+.carte-espece.clair {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.carte-espece.fonce {
+  background-color: #1a2332;
+  color: #ffffff;
+}
+
+.carte-espece img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.carte-espece h3 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+}
+
+.carte-espece p {
+  margin: 0 0 15px 0;
+  font-style: italic;
+}
+
+/* Tags / Badges */
+.tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  background-color: #e2e8f0;
+  color: #1a2332;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* SECTION STATUTS DE PROTECTION */
+.section-statuts {
+  margin: 50px 0;
+}
+
+.grille-statuts {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.carte-statut {
+  flex: 1;
+  min-width: 280px;
+  background: #f4f6f8;
+  padding: 25px;
+  border-left: 5px solid #00539f;
+}
+
+.carte-statut h3 {
+  margin-top: 0;
+}
+
+.carte-statut a {
+  color: #00539f;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+/* SECTION SENSIBILISATION & PILIERS  */
+.section-sensibilisation {
+  background-color: #e4e7eb; /* Gris clair de fond */
+  padding: 40px 20px;
+  margin: 50px 0;
+}
+
+.bloc-pourquoi {
+  background: #eef2f7;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.grille-piliers {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.pilier {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+}
+
+.pilier img {
+  width: 100%;
+  height: 400px; /* Hauteur fixe pour qu'elles aient toutes la même taille */
+  object-fit: cover; /* Évite que l'image soit déformée */
+  display: block;
+  border-radius: 4px;
+}
+
+.pilier h4 {
+  font-size: 1.9rem;
+  color: #1a2332;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.conteneur-btn {
+  text-align: center;
 }
