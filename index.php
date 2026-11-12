@@ -64,7 +64,7 @@ include($niveau . 'inc/config.inc.php');
         </nav>
 
         <figure class="image__header">
-            <img src="assets/image_exp/Aigle_héros2x.png" alt="Aigle - Image principale">
+            <img src="assets/image_exp/Aigle_heros2x.png" alt="Aigle - Image principale">
             <div class="image__contenu-superpose">
                 <h1 class="qc-h1">Découvrir. Comprendre. Protéger.</h1>
                 <a href="especes/index.php" class="qc-btn qc-btn-primary">Découvrir les espèces &rarr;</a>
