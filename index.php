@@ -45,7 +45,7 @@ include($niveau . 'inc/config.inc.php');
                 </form>
             </qc-piv-header>
         </div>
-        </qc-piv-header>
+
         <nav class="header__nav">
             <ul class="header__liste">
                 <li class="header__liste-item">
@@ -65,23 +65,20 @@ include($niveau . 'inc/config.inc.php');
 
         <figure class="image__header">
             <img src="assets/image_exp/Aigle_héros2x.png" alt="Aigle - Image principale">
+            <div class="image__contenu-superpose">
+                <h1 class="qc-h1">Découvrir. Comprendre. Protéger.</h1>
+                <a href="especes/index.php" class="qc-btn qc-btn-primary">Découvrir les espèces &rarr;</a>
+            </div>
         </figure>
     </header>
 
     <main id="main" class="qc-container">
-        <!-- Section Principale / Hero -->
-        <section class="section-hero">
-            <h1 class="qc-h1">Découvrir. Comprendre. Protéger.</h1>
-            <a href="especes/index.php" class="qc-btn qc-btn-primary">Découvrir les espèces</a>
-        </section>
 
         <h2 class="qc-h2">Actualité</h2>
-        <p class="accent">Un texte en accent et un <span> span. </span>
         </p>
 
         <!-- Section Actualité -->
         <section class="section-actualite">
-            <h2 class="qc-h2">Actualité</h2>
             <div class="grid-actualites">
                 <article class="carte-actu">
                     <img src="assets/images/" alt="">
