@@ -16,10 +16,10 @@ if ($blnLocal) {
     $strPassword = 'BIOdiversite';
     error_reporting(E_ALL);
 } else {
-    $strHost = 'timunix3.cegep-ste-foy.qc.ca';
-    $strBD='à déterminer';
-    $strUser = 'à déterminer';
-    $strPassword = 'à déterminer';
+    $strHost = 'timunix3.csfoy.ca';
+    $strBD='26_biotique';
+    $strUser = '26_biotique';
+    $strPassword = 'BIOdiversité!';
     error_reporting(E_ALL & ~E_NOTICE);
 }
 

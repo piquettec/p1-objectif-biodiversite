@@ -30,6 +30,7 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 ON especes.id = images.espece_id
                 WHERE `est_aire-repartition` = 0 
                 AND images.id != 104
+                ORDER BY especes.id ASC
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
@@ -67,7 +68,8 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 INNER JOIN images 
                 ON images.espece_id = especes.id
                 WHERE `est_aire-repartition` = 0 
-                AND images.id != 104";
+                AND images.id != 104
+                ORDER BY especes.id ASC";
 
 $pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
 $pdosResultatEspecesSug->execute();
@@ -91,7 +93,8 @@ for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++
                 ON images.espece_id = especes.id
                 WHERE especes.id = " . $ligneEspecesSug['id'] . "
                 AND 'est_aire-repartition' = 0 
-                AND images.id != 104";
+                AND images.id != 104
+                ORDER BY especes.id ASC";
 }
 
 $pdosResultatEspecesSug->closeCursor();

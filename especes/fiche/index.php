@@ -95,7 +95,7 @@ $pdosResultat->closeCursor();
                     <p><?php echo $arrListeEspeces['bas-de-vignette']; ?></p>
                 </figcaption>
             </figure>
-            <div class="especes-pastilles">
+            <section class="especes-pastilles">
                 <div class="pastilles-groupe">
                     <p><strong>Groupe : </strong>
                     <p class="especes-pastille_groupe
@@ -128,7 +128,7 @@ $pdosResultat->closeCursor();
                         <?php echo $arrListeEspeces["statut_LEMV"]; ?>
                     </p>
                 </div>
-            </div>
+            </section>
 
             <section>
                 <h2>Répartition</h2>

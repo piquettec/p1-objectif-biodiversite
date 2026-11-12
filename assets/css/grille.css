@@ -111,7 +111,7 @@
 .especes-pastilles {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 2rem;
 }
 
 .pastilles-groupe, 
@@ -137,31 +137,38 @@
     font-size: 1.5rem;
 }
 
-.carte__especes-pastille_groupe.groupe-poisson {
+.carte__especes-pastille_groupe.groupe-poisson,
+.especes-pastille_groupe.groupe-poisson {
     background-color: #dae6f0;
 }
 
-.carte__especes-pastille_groupe.groupe-mammifere {
+.carte__especes-pastille_groupe.groupe-mammifere,
+.especes-pastille_groupe.groupe-mammifere {
     background-color: #68ceba;
 }
 
-.carte__especes-pastille_groupe.groupe-oiseaux {
+.carte__especes-pastille_groupe.groupe-oiseaux,
+.especes-pastille_groupe.groupe-oiseaux {
     background-color: #d0dc03;
 }
 
-.carte__especes-pastille_groupe.groupe-amphibiens {
+.carte__especes-pastille_groupe.groupe-amphibiens,
+.especes-pastille_groupe.groupe-amphibiens {
     background-color: #f1f1f2;
 }
 
-.carte__especes-pastille_groupe.groupe-reptile {
+.carte__especes-pastille_groupe.groupe-reptile,
+.especes-pastille_groupe.groupe-reptile {
     background-color: #d7f0bb;
 }
 
-.carte__especes-pastille_statut.statut-menace {
+.carte__especes-pastille_statut.statut-menace,
+.especes-pastille_statut.statut-menace {
     background-color: #bc2916;
 }
 
-.carte__especes-pastille_statut.statut-vulnerable {
+.carte__especes-pastille_statut.statut-vulnerable,
+.especes-pastille_statut.statut-vulnerable {
     background-color: #f8e69a;
 }
 
