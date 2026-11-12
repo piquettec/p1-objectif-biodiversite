@@ -61,7 +61,7 @@ include($niveau . 'inc/config.inc.php');
                     <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
                 </li>
                 <li class="header__liste-item">
-                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/fiche/index.php">Fiche espèce</a>
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">À propos</a>
                 </li>
                 <li class="header__liste-item">
                     <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>

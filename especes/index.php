@@ -7,10 +7,14 @@ $strIdStatut = "";
 
 if (isset($_GET['groupe']) == true) {
     $strIdGroupe = $_GET['groupe'];
+} else {
+    $strIdGroupe = 0;
 }
 
 if (isset($_GET['statut']) == true) {
     $strIdStatut = $_GET['statut'];
+} else {
+    $strIdStatut = "0";
 }
 
 if (isset($_GET['id']) == true) {
@@ -21,7 +25,7 @@ if (isset($_GET['id']) == true) {
 
 $strRequete = 'SELECT id, nom_groupe
                FROM groupes
-               ORDER BY nom_groupe';
+               ORDER BY id ASC';
 
 $pdosGroupes = $pdoConnexion->prepare($strRequete);
 $pdosGroupes->execute();
@@ -91,7 +95,7 @@ else if ($strIdGroupe != 0) {
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
 }
 
-else if ($strIdStatut != 0) {
+else if ($strIdStatut != "0") {
     $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
@@ -241,7 +245,7 @@ function ecrireSelected($valeurOption, $nomSelection)
                     <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
                 </li>
                 <li class="header__liste-item">
-                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/fiche/index.php">Fiche espèce</a>
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">À propos</a>
                 </li>
                 <li class="header__liste-item">
                     <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
@@ -255,12 +259,11 @@ function ecrireSelected($valeurOption, $nomSelection)
             <h1>Liste des espèces</h1>
         </div>
 
-        <form id="form__filtre" method="get" action="index.php">
+        <form id="form__filtre" class="form__filtre" method="get" action="index.php">
             <fieldset class="filtre">
-
                 <div class="filtre__groupe">
-                    <label for="groupe">Par groupe :</label>
-                    <select name="groupe" id="groupe">
+                    <label class="filtre__titre" for="groupe">Par groupe :</label>
+                    <select class="filtre__option" name="groupe" id="groupe">
                         <option value="0">Tous les groupes</option>
                         <?php for ($intCpt = 0; $intCpt < count($arrGroupes); $intCpt++) { ?>
                             <option
@@ -273,20 +276,20 @@ function ecrireSelected($valeurOption, $nomSelection)
                 </div>
 
                 <div class="filtre__statut">
-                    <label for="statut">Par statut :</label>
-                    <select name="statut" id="statut">
+                    <label class="filtre__titre" for="statut">Par statut :</label>
+                    <select class="filtre__option" name="statut" id="statut">
                         <option value="0">Tous les statuts</option>
                         <?php for ($intCpt = 0; $intCpt < count($arrStatuts); $intCpt++) { ?>
-                            <option
-                                value="<?php echo htmlspecialchars($arrStatuts[$intCpt]['statut_LEMV']); ?>"
+                        <option
+                                value="<?php echo $arrStatuts[$intCpt]['statut_LEMV']; ?>"
                                 <?php echo ecrireSelected($arrStatuts[$intCpt]['statut_LEMV'], "statut"); ?>>
-                                <?php echo htmlspecialchars($arrStatuts[$intCpt]['statut_LEMV']); ?>
+                                <?php echo $arrStatuts[$intCpt]['statut_LEMV']; ?>
                             </option>
                         <?php } ?>
                     </select>
                 </div>
 
-                <button type="submit">Filtrer</button>
+                <button class="btn__filtre" type="submit">Filtrer</button>
 
             </fieldset>
         </form>
