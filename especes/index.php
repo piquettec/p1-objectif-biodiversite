@@ -2,11 +2,58 @@
 $niveau = "../";
 include($niveau . 'inc/config.inc.php');
 
+$strIdGroupe = "";
+$strIdStatut = "";
+
+if (isset($_GET['groupe']) == true) {
+    $strIdGroupe = $_GET['groupe'];
+} else {
+    $strIdGroupe = 0;
+}
+
+if (isset($_GET['statut']) == true) {
+    $strIdStatut = $_GET['statut'];
+} else {
+    $strIdStatut = "0";
+}
+
 if (isset($_GET['id']) == true) {
     $strIdPage = $_GET['id'];
 } else {
     $strIdPage = 0;
 }
+
+$strRequete = 'SELECT id, nom_groupe
+               FROM groupes
+               ORDER BY id ASC';
+
+$pdosGroupes = $pdoConnexion->prepare($strRequete);
+$pdosGroupes->execute();
+
+$arrGroupes = array();
+
+for ($cpt = 0; $ligne = $pdosGroupes->fetch(); $cpt++) {
+    $arrGroupes[$cpt]['id'] = $ligne['id'];
+    $arrGroupes[$cpt]['nom_groupe'] = $ligne['nom_groupe'];
+}
+
+$pdosGroupes->closeCursor();
+
+$strRequete = 'SELECT DISTINCT statut_LEMV
+               FROM especes
+               ORDER BY statut_LEMV';
+
+$pdosStatuts = $pdoConnexion->prepare($strRequete);
+$pdosStatuts->execute();
+
+$arrStatuts = array();
+
+for ($cpt = 0; $ligne = $pdosStatuts->fetch(); $cpt++) {
+    $arrStatuts[$cpt]['statut_LEMV'] = $ligne['statut_LEMV'];
+}
+
+$pdosStatuts->closeCursor();
+
 
 $nbEspecesParPage = 5;
 $enregistrementDepart = $strIdPage * $nbEspecesParPage;
@@ -23,14 +70,43 @@ $pdosCompte->closeCursor();
 
 $nbPages = ceil($nbEnregistrement / $nbEspecesParPage);
 
-$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+if ($strIdGroupe == 0 || $strIdStatut == 0) {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
                 ON especes.id = images.espece_id
                 WHERE `est_aire-repartition` = 0 
                 AND images.id != 104
+                ORDER BY especes.id ASC
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
+
+else if ($strIdGroupe != 0) {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON especes.id = images.espece_id
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
+                AND nom_groupe =" . $strIdGroupe . "
+                ORDER BY especes.id ASC
+                LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
+
+else if ($strIdStatut != "0") {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON especes.id = images.espece_id
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
+                AND statut_LEMV =" . $strIdStatut . "
+                ORDER BY especes.id ASC
+                LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
 $pdosResultat->execute();
@@ -67,7 +143,8 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 INNER JOIN images 
                 ON images.espece_id = especes.id
                 WHERE `est_aire-repartition` = 0 
-                AND images.id != 104";
+                AND images.id != 104
+                ORDER BY especes.id ASC";
 
 $pdosResultatEspecesSug = $pdoConnexion->prepare($strRequete);
 $pdosResultatEspecesSug->execute();
@@ -91,7 +168,8 @@ for ($CptEnr = 0; $ligneEspecesSug = $pdosResultatEspecesSug->fetch(); $CptEnr++
                 ON images.espece_id = especes.id
                 WHERE especes.id = " . $ligneEspecesSug['id'] . "
                 AND 'est_aire-repartition' = 0 
-                AND images.id != 104";
+                AND images.id != 104
+                ORDER BY especes.id ASC";
 }
 
 $pdosResultatEspecesSug->closeCursor();
@@ -101,6 +179,25 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
     $especesChoisi = rand(0, count($arrListeEspeces) - 1);
 
     array_splice($arrEspecesSug, $especesChoisi, 1);
+}
+
+function ecrireSelected($valeurOption, $nomSelection)
+{
+    $strSelection = "";
+    global $strIdGroupe;
+    global $strIdStatut;
+
+    if ($nomSelection == "groupe") {
+        if ($valeurOption == $strIdGroupe) {
+            $strSelection = 'selected = "selected"';
+        }
+    } else if ($nomSelection == "statut") {
+        if ($valeurOption == $strIdStatut) {
+            $strSelection = 'selected = "selected"';
+        }
+    }
+
+    return $strSelection;
 }
 
 ?>
@@ -148,7 +245,7 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
                     <a class="header__liste-lien" href="<?php echo $niveau ?>especes/index.php">Liste des espèces</a>
                 </li>
                 <li class="header__liste-item">
-                    <a class="header__liste-lien" href="<?php echo $niveau ?>especes/fiche/index.php">Fiche espèce</a>
+                    <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">À propos</a>
                 </li>
                 <li class="header__liste-item">
                     <a class="header__liste-lien" href="<?php echo $niveau ?>index.php">Nous contacter</a>
@@ -162,6 +259,40 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
             <h1>Liste des espèces</h1>
         </div>
 
+        <form id="form__filtre" class="form__filtre" method="get" action="index.php">
+            <fieldset class="filtre">
+                <div class="filtre__groupe">
+                    <label class="filtre__titre" for="groupe">Par groupe :</label>
+                    <select class="filtre__option" name="groupe" id="groupe">
+                        <option value="0">Tous les groupes</option>
+                        <?php for ($intCpt = 0; $intCpt < count($arrGroupes); $intCpt++) { ?>
+                            <option
+                                value="<?php echo $arrGroupes[$intCpt]['id']; ?>"
+                                <?php echo ecrireSelected($arrGroupes[$intCpt]['id'], "groupe"); ?>>
+                                <?php echo $arrGroupes[$intCpt]['nom_groupe']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <div class="filtre__statut">
+                    <label class="filtre__titre" for="statut">Par statut :</label>
+                    <select class="filtre__option" name="statut" id="statut">
+                        <option value="0">Tous les statuts</option>
+                        <?php for ($intCpt = 0; $intCpt < count($arrStatuts); $intCpt++) { ?>
+                        <option
+                                value="<?php echo $arrStatuts[$intCpt]['statut_LEMV']; ?>"
+                                <?php echo ecrireSelected($arrStatuts[$intCpt]['statut_LEMV'], "statut"); ?>>
+                                <?php echo $arrStatuts[$intCpt]['statut_LEMV']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <button class="btn__filtre" type="submit">Filtrer</button>
+
+            </fieldset>
+        </form>
         <ul class="liste__especes">
             <?php
             for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
@@ -250,6 +381,44 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
     </main>
 
     <footer>
+
+        <div class="footer__principal">
+            <a class="footer__logo" href="<?php echo $niveau ?>index.php"><img src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg" alt="Accédez à Québec.ca"></a>
+            <div class="footer__contenu">
+
+                <nav class="footer__navigation" aria-label="Navigation secondaire">
+                    <h2 class="footer__sous-titre">Navigation secondaire</h2>
+                    <ul>
+                        <li><a href="#">Accessibilité</a></li>
+                        <li><a href="#">Conditions d’utilisation</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer__coordonnes">
+                    <h2 class="footer__sous-titre">Coordonnées</h2>
+                    <div class="footer__adresse">
+                        <p>Ministère de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs</p>
+                        <p>675, boul. René-Lévesque Est</p>
+                        <p>Québec (Québec)</p>
+                        <p>G1R 5V7</p>
+                    </div>
+                </div>
+
+                <div class="footer__réseaux">
+                    <h2 class="footer__sous-titre">Suivez-nous</h2>
+                    <ul class="footer__reseaux-liens">
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://x.com/">X (Twitter)</a></li>
+                        <li><a href="https://www.youtube.com/">YouTube</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
         <qc-piv-footer logo-src="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_couleur.svg"
             logo-src-dark-theme="<?php echo $niveau ?>assets/sdg/dist/img/QUEBEC_blanc.svg">
             <nav aria-label="Navigation du pied de page">
