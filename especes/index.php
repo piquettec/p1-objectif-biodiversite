@@ -2,11 +2,54 @@
 $niveau = "../";
 include($niveau . 'inc/config.inc.php');
 
+$strIdGroupe = "";
+$strIdStatut = "";
+
+if (isset($_GET['groupe']) == true) {
+    $strIdGroupe = $_GET['groupe'];
+}
+
+if (isset($_GET['statut']) == true) {
+    $strIdStatut = $_GET['statut'];
+}
+
 if (isset($_GET['id']) == true) {
     $strIdPage = $_GET['id'];
 } else {
     $strIdPage = 0;
 }
+
+$strRequete = 'SELECT id, nom_groupe
+               FROM groupes
+               ORDER BY nom_groupe';
+
+$pdosGroupes = $pdoConnexion->prepare($strRequete);
+$pdosGroupes->execute();
+
+$arrGroupes = array();
+
+for ($cpt = 0; $ligne = $pdosGroupes->fetch(); $cpt++) {
+    $arrGroupes[$cpt]['id'] = $ligne['id'];
+    $arrGroupes[$cpt]['nom_groupe'] = $ligne['nom_groupe'];
+}
+
+$pdosGroupes->closeCursor();
+
+$strRequete = 'SELECT DISTINCT statut_LEMV
+               FROM especes
+               ORDER BY statut_LEMV';
+
+$pdosStatuts = $pdoConnexion->prepare($strRequete);
+$pdosStatuts->execute();
+
+$arrStatuts = array();
+
+for ($cpt = 0; $ligne = $pdosStatuts->fetch(); $cpt++) {
+    $arrStatuts[$cpt]['statut_LEMV'] = $ligne['statut_LEMV'];
+}
+
+$pdosStatuts->closeCursor();
+
 
 $nbEspecesParPage = 5;
 $enregistrementDepart = $strIdPage * $nbEspecesParPage;
@@ -23,7 +66,8 @@ $pdosCompte->closeCursor();
 
 $nbPages = ceil($nbEnregistrement / $nbEspecesParPage);
 
-$strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+if ($strIdGroupe == 0 || $strIdStatut == 0) {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
                 FROM especes INNER JOIN groupes 
                 ON especes.groupe_id = groupes.id 
                 INNER JOIN images 
@@ -32,6 +76,33 @@ $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, sta
                 AND images.id != 104
                 ORDER BY especes.id ASC
                 LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
+
+else if ($strIdGroupe != 0) {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON especes.id = images.espece_id
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
+                AND nom_groupe =" . $strIdGroupe . "
+                ORDER BY especes.id ASC
+                LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
+
+else if ($strIdStatut != 0) {
+    $strRequete = "SELECT nom_francais, nom_scientifique, nom_image, nom_groupe, statut_LEMV, especes.id, 'est_aire-repartition'
+                FROM especes INNER JOIN groupes 
+                ON especes.groupe_id = groupes.id 
+                INNER JOIN images 
+                ON especes.id = images.espece_id
+                WHERE `est_aire-repartition` = 0 
+                AND images.id != 104
+                AND statut_LEMV =" . $strIdStatut . "
+                ORDER BY especes.id ASC
+                LIMIT " . $enregistrementDepart . ',' . $nbEspecesParPage;
+}
 
 $pdosResultat = $pdoConnexion->prepare($strRequete);
 $pdosResultat->execute();
@@ -106,6 +177,25 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
     array_splice($arrEspecesSug, $especesChoisi, 1);
 }
 
+function ecrireSelected($valeurOption, $nomSelection)
+{
+    $strSelection = "";
+    global $strIdGroupe;
+    global $strIdStatut;
+
+    if ($nomSelection == "groupe") {
+        if ($valeurOption == $strIdGroupe) {
+            $strSelection = 'selected = "selected"';
+        }
+    } else if ($nomSelection == "statut") {
+        if ($valeurOption == $strIdStatut) {
+            $strSelection = 'selected = "selected"';
+        }
+    }
+
+    return $strSelection;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -165,21 +255,39 @@ for ($CptEnr = 0; $CptEnr <= 2; $CptEnr++) {
             <h1>Liste des espèces</h1>
         </div>
 
-        <form id="form__filtre">
+        <form id="form__filtre" method="get" action="index.php">
             <fieldset class="filtre">
-                <ul class="filtre__liste">
-                    <li class="section-title">Par statut :</li>
-                    <?php for ($intCpt = 0; $intCpt < count($arrListeEspeces); $intCpt++) { ?>
-                        <li class="list-option">
-                            <input
-                                type="checkbox"
-                                id="Statut"
-                                name="statut"
-                                value="<?php echo $ligneEspecesSug['statut_LEMV'] ?>" />
-                            <label for="Statut" class="form_statut"><?php echo $arrEspecesSug[$intCpt]['statut_LEMV'] ?></label>
-                        </li>
-                    <?php } ?>
-                </ul>
+
+                <div class="filtre__groupe">
+                    <label for="groupe">Par groupe :</label>
+                    <select name="groupe" id="groupe">
+                        <option value="0">Tous les groupes</option>
+                        <?php for ($intCpt = 0; $intCpt < count($arrGroupes); $intCpt++) { ?>
+                            <option
+                                value="<?php echo $arrGroupes[$intCpt]['id']; ?>"
+                                <?php echo ecrireSelected($arrGroupes[$intCpt]['id'], "groupe"); ?>>
+                                <?php echo $arrGroupes[$intCpt]['nom_groupe']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <div class="filtre__statut">
+                    <label for="statut">Par statut :</label>
+                    <select name="statut" id="statut">
+                        <option value="0">Tous les statuts</option>
+                        <?php for ($intCpt = 0; $intCpt < count($arrStatuts); $intCpt++) { ?>
+                            <option
+                                value="<?php echo htmlspecialchars($arrStatuts[$intCpt]['statut_LEMV']); ?>"
+                                <?php echo ecrireSelected($arrStatuts[$intCpt]['statut_LEMV'], "statut"); ?>>
+                                <?php echo htmlspecialchars($arrStatuts[$intCpt]['statut_LEMV']); ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <button type="submit">Filtrer</button>
+
             </fieldset>
         </form>
         <ul class="liste__especes">
